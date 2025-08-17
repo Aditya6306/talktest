@@ -101,7 +101,14 @@ export async function getCurrentUser(): Promise<User | null> {
   const cookieStore = await cookies();
 
   const sessionCookie = cookieStore.get("session")?.value;
-  if (!sessionCookie) return null;
+
+  console.log("sessionCookie:", sessionCookie);
+
+  // if (!sessionCookie) return null;
+  if (!sessionCookie) {
+    console.warn("No session cookie found");
+    return null;
+  }
 
   try {
     const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
