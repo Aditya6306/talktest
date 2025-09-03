@@ -127,13 +127,17 @@ export async function getLatestInterviews(
 }
 
 export async function getInterviewsByUserId(
-  userId: string
+  params: GetUserInterviewsParams
 ): Promise<Interview[] | null> {
+  const { userId } = params;
+
   const interviews = await db
     .collection("interviews")
     .where("userId", "==", userId)
     .orderBy("createdAt", "desc")
     .get();
+
+    // console.log("fetched interviews", interviews)
 
   return interviews.docs.map((doc) => ({
     id: doc.id,

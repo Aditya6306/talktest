@@ -71,6 +71,10 @@ interface GetLatestInterviewsParams {
   limit?: number;
 }
 
+interface GetUserInterviewsParams {
+  userId: string;
+}
+
 interface SignInParams {
   email: string;
   idToken: string;
